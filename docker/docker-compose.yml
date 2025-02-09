@@ -1,7 +1,7 @@
-version: '3.1'
+version: "3.1"
 services:
   sidekick-db:
-    image: mysql
+    image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     container_name: sidekick-db
@@ -32,7 +32,7 @@ services:
       - rabbitmq-log:/var/log/rabbitmq
     restart: always
   sidekick-broker:
-    image: runsidekick/sidekick-broker:latest
+    image: ghcr.io/dale-digital/sidekick/broker:latest
     restart: always
     container_name: sidekick-broker
     depends_on:
@@ -44,7 +44,7 @@ services:
       - 8080:8080
     env_file: .env
   sidekick-api:
-    image: runsidekick/sidekick-api:latest
+    image: ghcr.io/dale-digital/sidekick/api:latest
     restart: always
     container_name: sidekick-api
     depends_on:
@@ -61,4 +61,3 @@ volumes:
   rabbitmq-data:
   rabbitmq-log:
   redis-data:
-
